@@ -15,7 +15,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     // 'info' contains Passport error messages (like "jwt expired")
 
     if (err || !user) {
-      console.log(info);
       // You can get specific here:
       if (info?.message === 'No auth token') {
         throw new UnauthorizedException(AUTH_MESSAGES.TOKEN_REQUIRED);
