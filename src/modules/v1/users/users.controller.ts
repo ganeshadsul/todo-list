@@ -10,6 +10,7 @@ import {
   Put,
   HttpStatus,
   HttpCode,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -17,6 +18,7 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserResponseInterceptor } from './interceptors/user-response.interceptor';
 import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
 import { USER_MESSAGES } from 'src/common/constants/message.constant';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @UseInterceptors(UserResponseInterceptor)
 @Controller({
@@ -32,6 +34,7 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   @ResponseMessage(USER_MESSAGES.FOUND_ALL)
   findAll() {
