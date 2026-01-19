@@ -1,6 +1,8 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { AuthService } from './auth.service';
+import { ResponseMessage } from 'src/common/decorators/response-message.decorator';
+import { AUTH_MESSAGES } from 'src/common/constants/message.constant';
 
 @Controller({
   path: 'auth',
@@ -11,7 +13,8 @@ export class AuthController {
 
   @Post('/login')
   @HttpCode(HttpStatus.OK)
-  login(@Body loginDto: LoginDto) {
+  @ResponseMessage(AUTH_MESSAGES.SUCCES)
+  login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
   }
 }
