@@ -13,4 +13,7 @@ export const SUCCESS = 'success';
 export const AUTH_MESSAGES = {
   SUCCES: 'Login successful.',
   INVALID: 'Invalid credentials.',
+  TOKEN_INVALID: 'Invalid token / Token expired.',
+  TOKEN_EXPIRED: 'Your session has expired. Please log in again.',
+  TOKEN_REQUIRED: 'Authentication token is required.',
 };
