@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectModel } from '@nestjs/mongoose';
-import { User as UserModel } from './schemas/user.schema';
+import { UserDocument, User as UserModel } from './schemas/user.schema';
 import { Model } from 'mongoose';
 import { USER_MESSAGES } from 'src/common/constants/message.constant';
 import { DE_ACTIVE } from 'src/common/constants/app.constant';
@@ -54,5 +54,9 @@ export class UsersService {
     return await this.User.findByIdAndUpdate(id, {
       $set: { isActive: DE_ACTIVE, deletedAt: new Date() },
     });
+  }
+
+  async findForAuth(email: string): Promise<UserDocument | null> {
+    return await this.User.findOne({ email }).select('+password').exec();
   }
 }

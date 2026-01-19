@@ -3,7 +3,7 @@ import { Document, HydratedDocument } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import validator from 'validator';
 
-type UserDocument = HydratedDocument<User>;
+export type UserDocument = HydratedDocument<User>;
 
 @Schema({
   timestamps: true,
@@ -42,6 +42,7 @@ export class User {
     required: [true, 'Password is required.'],
     trim: true,
     minLength: [8, 'Password must be of atleast 8 characters.'],
+    select: false,
     validate: [
       {
         validator: (value: string) =>
@@ -59,6 +60,7 @@ export class User {
     required: [true, 'Confirm password is required.'],
     trim: true,
     minLength: [8, 'Password must be of atleast 8 characters.'],
+    select: false,
     validate: [
       {
         validator: function (this: User, value) {
@@ -79,6 +81,8 @@ export class User {
     default: null,
   })
   deletedAt: Date;
+
+  comparePassword: (inputPassword: string) => Promise<boolean>;
 }
 export const UserSchema = SchemaFactory.createForClass(User);
 
@@ -88,3 +92,10 @@ UserSchema.pre('save', async function (this: UserDocument) {
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
 });
+
+UserSchema.methods.comparePassword = async function (
+  inputPassword: string,
+): Promise<boolean> {
+  const user = this as UserDocument;
+  return bcrypt.compare(inputPassword, user.password);
+};

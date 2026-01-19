@@ -7,3 +7,10 @@ export const USER_MESSAGES = {
   DELETED: 'User deleted successfully.',
   NOT_FOUND: (value: string) => `User not found at id ${value}.`,
 } as const;
+
+export const SUCCESS = 'success';
+
+export const AUTH_MESSAGES = {
+  SUCCES: 'Login successful.',
+  INVALID: 'Invalid credentials.',
+};
