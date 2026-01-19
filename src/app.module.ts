@@ -5,6 +5,8 @@ import { UsersModule } from './modules/v1/users/users.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/v1/auth/auth.module';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { GlobalTransformInterceptor } from './common/interceptors/global-transform.interceptor';
 
 @Module({
   imports: [
@@ -24,6 +26,12 @@ import { AuthModule } from './modules/v1/auth/auth.module';
     AuthModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: GlobalTransformInterceptor,
+    },
+  ],
 })
 export class AppModule {}
