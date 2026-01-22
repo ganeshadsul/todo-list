@@ -36,8 +36,7 @@ export class UsersService {
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
-    const { firstName, lastName, email } = updateUserDto;
-    const safeData: SafeUpdate = { firstName, lastName, email };
+    const safeData: SafeUpdate = updateUserDto;
 
     const user = await this.User.findByIdAndUpdate(
       id,
