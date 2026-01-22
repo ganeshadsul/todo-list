@@ -7,6 +7,15 @@ export const USER_MESSAGES = {
   DELETED: 'User deleted successfully.',
   NOT_FOUND: (value: string) => `User not found at id ${value}.`,
 } as const;
+export const LIST_MESSAGES = {
+  CREATED: 'List created successfully.',
+  FOUND_ALL: 'Lists found.',
+  FOUND_ONE: 'List details found.',
+  UPDATED: 'List updated successfully.',
+  PATCHED: 'List details patched successfully.',
+  DELETED: 'List deleted successfully.',
+  NOT_FOUND: (value: string) => `List not found at id ${value}.`,
+} as const;
 
 export const SUCCESS = 'success';
 

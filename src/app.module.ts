@@ -7,6 +7,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './modules/v1/auth/auth.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { GlobalTransformInterceptor } from './common/interceptors/global-transform.interceptor';
+import { ListsModule } from './modules/v1/lists/lists.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { GlobalTransformInterceptor } from './common/interceptors/global-transfo
     }),
     UsersModule,
     AuthModule,
+    ListsModule,
   ],
   controllers: [AppController],
   providers: [
