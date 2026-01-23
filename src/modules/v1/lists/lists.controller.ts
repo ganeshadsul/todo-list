@@ -75,4 +75,16 @@ export class ListsController {
   remove(@Param('id') id: string, @Req() req: { user: UserDocument }) {
     return this.listsService.remove(id, req.user);
   }
+
+  @Patch(':id/mark-done')
+  @ResponseMessage(LIST_MESSAGES.MARKED_DONE)
+  markDone(@Param('id') id: string, @Req() req: { user: UserDocument }) {
+    return this.listsService.markDone(id, req.user);
+  }
+
+  @Patch(':id/mark-important')
+  @ResponseMessage(LIST_MESSAGES.MARKED_IMPORTANT)
+  markImportant(@Param('id') id: string, @Req() req: { user: UserDocument }) {
+    return this.listsService.markImportant(id, req.user);
+  }
 }

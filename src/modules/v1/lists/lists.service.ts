@@ -69,4 +69,21 @@ export class ListsService {
       },
     );
   }
+
+  async markDone(id: string, user: UserDocument) {
+    const list = await this.List.findOneAndUpdate(
+      { _id: id, createdBy: user._id },
+      { $set: { isCompleted: 1, updatedBy: new Types.ObjectId(user.id) } },
+      { new: true },
+    ).exec();
+    return list;
+  }
+  async markImportant(id: string, user: UserDocument) {
+    const list = await this.List.findOneAndUpdate(
+      { _id: id, createdBy: user._id },
+      { $set: { isImportant: true, updatedBy: new Types.ObjectId(user.id) } },
+      { new: true },
+    ).exec();
+    return list;
+  }
 }

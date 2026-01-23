@@ -15,6 +15,8 @@ export const LIST_MESSAGES = {
   PATCHED: 'List details patched successfully.',
   DELETED: 'List deleted successfully.',
   NOT_FOUND: (value: string) => `List not found at id ${value}.`,
+  MARKED_DONE: 'List marked done.',
+  MARKED_IMPORTANT: 'List marked important.',
 } as const;
 
 export const SUCCESS = 'success';
