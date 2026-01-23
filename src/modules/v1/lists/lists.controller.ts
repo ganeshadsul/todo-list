@@ -39,14 +39,14 @@ export class ListsController {
 
   @Get()
   @ResponseMessage(LIST_MESSAGES.FOUND_ALL)
-  findAll() {
-    return this.listsService.findAll();
+  findAll(@Req() req: { user: UserDocument }) {
+    return this.listsService.findAll(req.user);
   }
 
   @Get(':id')
   @ResponseMessage(LIST_MESSAGES.FOUND_ONE)
-  findOne(@Param('id') id: string) {
-    return this.listsService.findOne(id);
+  findOne(@Param('id') id: string, @Req() req: { user: UserDocument }) {
+    return this.listsService.findOne(id, req.user);
   }
 
   @Put(':id')
